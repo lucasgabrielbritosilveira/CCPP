@@ -3,15 +3,16 @@ Histórico dos assuntos discutidos nos encontros da célula de c++. A célula de
 
 # Tópicos 
 
-- [x] [Very Basic] (VeryBasic/)
+- [x] Very Basic
 - [x] Variables
+- [ ] Memory Management
 - [ ] OOP
-- [ ] Memory Management 
 - [ ] Loops
 - [ ] Functions
 - [ ] STL
 
 
 ## Repositório
+Além desse repositório com códigos criados por mim para debate na célula, criei alguns slides sobre os tópicos abordados para servirem de material de estudo para os participantes.
 
 [Slides](https://drive.google.com/drive/u/0/folders/1T-8xh3OH7xW29odSdxPO-dDwtga3EcYZ)
