@@ -1,5 +1,5 @@
-#include "includes/Position.hpp"
-#include "includes/copyConstructor.hpp"
+#include "modules/Block/includes/copyConstructor.hpp"
+#include "modules/Position/includes/Position.hpp"
 #include <iostream>
 
 constexpr int option = 1;

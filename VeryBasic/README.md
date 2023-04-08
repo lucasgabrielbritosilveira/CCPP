@@ -5,11 +5,11 @@ O primeiro assunto discutido foi sobre o processo de build, pré-processamento, 
 # Comandos
 
 ### Obtendo o resultado do pré-processamento
- g++ codigo.cpp -E 
-
+ ```g++ codigo.cpp -E ```
+ 
  Exibirá o resultado no terminal, para salvar em um arquivo podemos sobrescrever em um arquivo cpp. No exemplo abaixo usarei um arquivo chamado output.cpp
 
- g++ codigo.cpp -E > output,cpp
+ ```g++ codigo.cpp -E > output,cpp```
 
 ### Compilar um código c++:
 
@@ -17,7 +17,7 @@ g++ arquivoFonte.cpp -o nomeDoPrograma
 
 Para códigos com mais de um arquivo fonte pode ser útil usar o * para pegar todos os arquivos que terminem com a extensão .cpp.
 
-g++ *.cpp -o nomeDoPrograma
+```g++ *.cpp -o nomeDoPrograma```
 
 -o significa output e o argumento é o nome que queremos que o programa gerado tenha. Por padrão ao não definir um output a saida é a.out.
 
