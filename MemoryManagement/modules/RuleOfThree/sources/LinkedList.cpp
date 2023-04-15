@@ -1,6 +1,45 @@
 #include "../includes/LinkedList.hpp"
 #include "../includes/Node.hpp"
 #include <iostream>
+
+LinkedList::LinkedList() { head = nullptr; }
+LinkedList::~LinkedList() {
+  std::cout << "Destruindo \n";
+  auto node = head;
+  while (node != nullptr) {
+    std::cout << "Apagando o nó " << node->value << "\n";
+    auto tmp = node->next;
+    remove(node->value);
+    node = tmp;
+  }
+}
+LinkedList &LinkedList::operator=(LinkedList const &b) {
+  clear();
+  Node *node = b.head;
+  while (node != nullptr) {
+    this->add(node->value);
+    node = node->next;
+  }
+  return *this;
+}
+LinkedList LinkedList::operator+(LinkedList const &b) {
+  LinkedList tmp = LinkedList();
+
+  auto node = head;
+  while (node != nullptr) {
+    tmp.add(node->value);
+    node = node->next;
+  }
+
+  node = b.head;
+  while (node != nullptr) {
+    tmp.add(node->value);
+    node = node->next;
+  }
+
+  return tmp;
+}
+
 Node *LinkedList::tail() {
   auto node = head;
   while (node != nullptr) {
@@ -42,53 +81,40 @@ void LinkedList::show() {
   }
   std::cout << "\n";
 }
+void LinkedList::remove(Node *node) {
+  if (node->previous == nullptr) {
+    if (auto tmp = node->next; tmp != nullptr) {
+      tmp->previous = nullptr;
+      head = tmp;
+    } else {
+      head = nullptr;
+    }
+    delete node;
+    return;
+  }
+
+  if (node->next == nullptr) {
+    node->previous->next = nullptr;
+    delete node;
+    return;
+  }
+
+  if (node->next != nullptr && node->previous != nullptr) {
+    node->previous->next = node->next;
+    delete node;
+    return;
+  }
+}
 void LinkedList::remove(int value) {
   if (Node *node = search(value); node != nullptr) {
-    if (node->previous == nullptr) {
-      std::cout << " 1 ";
-      if (node->next != nullptr) {
-        node->next->previous = nullptr;
-      } else {
-        delete head;
-        head = nullptr;
-        std::cout << " 1.2 ";
-      }
-      return;
-    }
-
-    if (node->next == nullptr) {
-      node->previous->next = nullptr;
-      delete node;
-
-      std::cout << "\n 2 \n";
-      return;
-    }
-
-    if (node->next != nullptr && node->previous != nullptr) {
-      node->previous->next = node->next;
-      delete node;
-
-      std::cout << "\n 3 \n";
-      return;
-    }
+    remove(node);
   }
 }
-
-LinkedList LinkedList::operator+(LinkedList const &b) {
-  LinkedList tmp = LinkedList();
-
-  auto node = head;
+void LinkedList::clear() {
+  auto node = this->head;
   while (node != nullptr) {
-    tmp.add(node->value);
-    node = node->next;
+    auto tmp = node->next;
+    remove(node);
+    node = tmp;
   }
-
-  node = b.head;
-  while (node != nullptr) {
-    tmp.add(node->value);
-    node = node->next;
-  }
-
-  return tmp;
 }
-LinkedList LinkedList::operator=(LinkedList const &b) {}
