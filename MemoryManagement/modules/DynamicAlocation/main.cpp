@@ -1,20 +1,20 @@
 #include "includes/Fatman.hpp"
 #include <iostream>
 int main() {
-  constexpr int option = 2;
-  if constexpr (option) {
+  constexpr int option = 1;
+  if constexpr (option == 1) {
     Meal chiken;
     chiken.kcal = 5000;
     Fatman *Bob = new Fatman();
     int i = 0;
-    while (i < Bob->hungry) {
+    while (i < 1) {
       std::cout << "Comendo...\n";
       Bob->eat(chiken);
       i++;
     }
 
-    // free;
-    delete Bob;
+    free(Bob);
+    // delete Bob;
     while (true) {
     }
   } else if constexpr (option == 2) {
@@ -31,6 +31,5 @@ int main() {
 
     while (true) {
     }
-  } else {
   }
 }
