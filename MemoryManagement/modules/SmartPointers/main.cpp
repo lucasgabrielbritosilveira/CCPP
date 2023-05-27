@@ -1,47 +1,40 @@
-#include "includes/Block.hpp"
-#include "smartPointers.hpp"
+#include "Position/includes/Position.hpp"
 #include <iostream>
+#include <memory>
 int main() {
-  smartPointers smartPtr1(30, 48);
-  smartPointers smartPtr2(24, 34);
+  int constexpr option = 1;
+  if constexpr (option == 1) {
+    std::unique_ptr<Position> ptr = std::make_unique<Position>(4, 3, 1);
+    std::unique_ptr<Position> ptr2;
 
-  std::cout << " ---- Information of smartPtr1 --- "
-            << "\n";
-  smartPtr1.showInformation();
-  smartPtr1.getMyBlockPtr()->ShowInformation();
+    ptr->showPosition();
+    ptr->showAddress();
+    // ptr2 = ptr;
+    ptr2->showAddress();
+    ptr2 = std::move(ptr);
+    ptr2->showAddress();
 
-  std::cout << " ---- Information of smartPtr2 --- "
-            << "\n";
-  smartPtr2.getMyBlockPtr()->ShowInformation();
-  smartPtr2.showInformation();
+    ptr->showAddress();
 
-  std::cout << "------ \n";
+    ptr2->showPosition();
 
-  smartPtr1 = smartPtr2;
+    ptr2->setPosition(5, 4);
 
-  std::cout << " ---- Information of smartPtr1 --- "
-            << "\n";
-  smartPtr1.showInformation();
-  smartPtr1.getMyBlockPtr()->ShowInformation();
+    ptr2->showPosition();
 
-  std::cout << " ---- Information of smartPtr2 --- "
-            << "\n";
-  smartPtr2.getMyBlockPtr()->ShowInformation();
-  smartPtr2.showInformation();
+    ptr->showPosition();
+  } else {
+    std::shared_ptr<Position> ptr = std::make_shared<Position>(5, 9, 1);
+    ptr->showAddress();
+    ptr->showPosition();
+    std::cout << ptr.use_count() << "\n";
 
-  std::cout << "------ \n";
+    auto ptr2 = ptr;
+    ptr2->showAddress();
+    ptr->showAddress();
+    std::cout << ptr.use_count() << "\n";
 
-  *(smartPtr1.getMyBlockPtr()) = Block(50, 15);
-
-  std::cout << " ---- Information of smartPtr1 --- "
-            << "\n";
-  smartPtr1.showInformation();
-  smartPtr1.getMyBlockPtr()->ShowInformation();
-
-  std::cout << " ---- Information of smartPtr2 --- "
-            << "\n";
-  smartPtr2.getMyBlockPtr()->ShowInformation();
-  smartPtr2.showInformation();
-
-  std::cout << "------ \n";
+    auto ptr3 = ptr2;
+    std::cout << ptr.use_count() << "\n";
+  }
 }
